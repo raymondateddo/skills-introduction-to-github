@@ -206,7 +206,7 @@
       "hidden": true
     }
   ],
-  "learner_prompt": "You are the outside operator and permit approver-verifier. In each scene, state what you do and say, and why. Ask for missing information. Reference safeguards and procedures explicitly. Focus on verifying safeguards, confirming zero energy (including vent/bleeder verification), and using clear, closed-loop communication.",
+  "learner_prompt": "You are the outside operator and permit approver-verifier. In each scene, state what you do and say, and why. Ask for missing information. Reference safeguards and procedures explicitly. Focus on verifying safeguards, and using clear, closed-loop communication.",
   "star_criteria": [
     {
       "id": "requested-isolation-list",
