@@ -233,7 +233,10 @@
         "name": "Tom",
         "role": "Maintenance / Crew Lead",
         "personality": "Practical, concise; supports walk-through when prompted",
-        "roleplay_objective": "Wants the learner to request for zero energy verification by opening bleeder valve."
+        "roleplay_objective": "Wants the learner to request for zero energy verification by opening bleeder valve.",
+        "initial_messages": [
+          "Mike with control room. You've got a pump recommissioning to authorize today. Anything you need to know before you start?"
+        ]
         
       },
       "given_resources": [
@@ -274,6 +277,7 @@
           "description": "Ask for zero energy verification.",
           "completion_criteria": "Learner asks for zero energy verification.",
           "is_hidden": true,
+          "next_node_id": "A2A_Zero_Energy_Pressure_Valve",
           "evidence_requirements": {
             "required_interactions": [
               {
@@ -295,9 +299,13 @@
                   {
                     "id": "swc.check.4.right",
                     "value": true
+                  },
+                   {
+                    "id": "swc.check.5.right",
+                    "value": true
                   }
-                ]
-              }
+                ],
+              },
             ]
           },
         },
@@ -316,7 +324,28 @@
               "Start the pump now; I don't need any more proof."
             ],
           },
-          "next_node_id": "A2_Perform_Bleeder_Valve_Check"
+          "next_node_id": "A3A_SWC_Dialogue"
+        },
+        {
+          "id": "A1_T2_Complete_SWC_Form_Without_Verification",
+          "description": "Confirm SWC document checks.",
+          "completion_criteria": "Learner confirms the Start Work Check PDF is executed: required checks and signature blocks are complete on the document, not just verbal approval.",
+          "is_hidden": true,
+          "next_node_id":"A2B_Verification_Request",
+          "evidence_requirements": {
+            "required_interactions": [
+              {
+                "type": "signable_document",
+                "object_id": "SWC",
+                "positions": [
+                  {
+                    "id": "swc.check.6.right",
+                    "value": true
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
           "id": "A1_T3_Provides_clearance_without_zero_energy_verification",
@@ -325,29 +354,32 @@
           "is_hidden": true,
           "evidence_requirements": {
           },
-          "next_node_id": "O2_Incident_Flange_Break"
+          "next_node_id": "O3_Valve_Blowby"
         }
       ],
       "is_roleplay_complete": false,
       "is_roleplay_failed": false
     },
     {
-      "id": "A2_Perform_Bleeder_Valve_Check",
-      "title": "Walkthrough and SWC Dialogue",
-      "description": "The learner has verified the walkdown and need to add his verifications to the swc form.",
+      "id": "A2A_Zero_Energy_Pressure_Valve",
+      "title": "Zero energy verified through pressure valve reading",
+      "description": "The learner is provided a 0 reading on pressure valve and is asked to add his verifications to the swc form.",
       "role_play_persona": {
         "name": "Tom",
         "role": "Maintenance / Crew Lead",
         "personality": "Practical, concise; supports walk-through when prompted",
-        "roleplay_objective": "Wants the learner to request for bleeder valve check to be done."      
+        "roleplay_objective": "Wants the learner to add his verification check to SWC.",
+         "initial_messages": [
+          "The pressure valve shows a reading of zero. Can I start?"
+        ]
       },
-  
       "tasks": [
         {
-          "id": "A2_T1_Request_Bleeder_Valve_Open",
+          "id": "A2A_T0_Request_Bleeder_Valve_Open",
           "description": "Ask to open bleeder valve.",
           "completion_criteria": "Learner asks Tom to open the bleeder valve and verify zero energy.",
           "is_hidden": true,
+          "next_node_id": "A3A_SWC_Dialogue",
           "semantic_completion": {
             "intent": "request_bleeder_valve_verification",
             "description": "Learner asks Tom to open the bleeder valve to verify zero energy.",
@@ -358,16 +390,222 @@
               "Start the pump now; I don't need any more proof."
             ],
           },
-          "next_node_id": "O1_Safe_Outcome_Recommission"
         },
         {
-          "id": "A1_T2_Provides_clearance_without_zero_energy_verification",
+          "id": "A2_T1_Provides_clearance_without_zero_energy_verification",
           "description": "Provides clearance without zero energy verification.",
           "completion_criteria": "Learner provides clearance without zero energy verification.",
           "is_hidden": true,
           "evidence_requirements": {
+            "forbidden_completed_task_ids": [
+              "A2A_T0_Request_Bleeder_Valve_Open"
+            ]
           },
           "next_node_id": "O2_Incident_Flange_Break"
+        }
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+    {
+      "id": "A2B_Approval_Request",
+      "title": "Gives approval",
+      "description": "The learner is ready to give his approval to start work.",
+      "role_play_persona": {
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work, but provide verification walkthrough when prompted.",
+        "initial_messages": [
+          "You've completed the verification in the SWC. Can I start?"
+        ]
+      },
+      "tasks": [
+        {
+          "id": "A2B_T0_Provides_Approval",
+          "description": "Provides approval to start work.",
+          "is_hidden": true,
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
+            ]
+          },
+          "next_node_id": "O2_Incident_Flange_Break"
+        },
+        {
+          "id": "A2B_T1_Request_Zero_Energy_Verification",
+          "description": "Ask for zero energy verification.",
+          "completion_criteria": "Learner asks for zero energy verification.",
+          "is_hidden": true,
+          "next_node_id": "A3B_Approval_Request"
+        }
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+    {
+      "id": "A3A_SWC_Dialogue",
+      "title": "Walkthrough and SWC Dialogue",
+      "description": "The learner has verified the walkdown and need to add his verifications to the swc form.",
+      "role_play_persona": {
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work, but provide verification walkthrough when prompted.",
+        "initial_messages": [
+          "I've opened the bleeder valve to verify zero energy, we are clear. Can I start?"
+        ]
+      },
+      "given_resources": [
+        "SWC",
+        "PTW"
+      ],
+      "interactable_state_on_enter": [
+        {
+          "object_id": "SWC",
+          "signing_positions": [
+            {
+              "id": "swc.check.1.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.2.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.3.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.4.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.5.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.6.left",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "tasks": [
+        {
+          "id": "A3A_T0_Complete_SWC_Form",
+          "description": "Confirm SWC document checks.",
+          "completion_criteria": "Learner confirms the Start Work Check PDF is executed: required checks and signature blocks are complete on the document, not just verbal approval.",
+          "is_hidden": true,
+          "next_node_id":"A4_Approval_Request",
+          "evidence_requirements": {
+            "required_interactions": [
+              {
+                "type": "signable_document",
+                "object_id": "SWC",
+                "positions": [
+                  {
+                    "id": "swc.check.6.right",
+                    "value": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "A3A_T1_Provides_Approval",
+          "description": "Provides approval to start work.",
+          "is_hidden": true,
+          "evidence_requirements": {
+            "forbidden_completed_task_ids": [
+              "A3A_T0_Complete_SWC_Form"
+            ]
+          },
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
+            ]
+          },
+          "next_node_id": "O2_Incident_Flange_Break"
+        }
+      }  
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+    {
+      "id": "A3B_Approval_Request",
+      "title": "Gives approval",
+      "description": "The learner is ready to give his approval to start work.",
+      "role_play_persona": {
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work, but provide verification walkthrough when prompted.",
+        "initial_messages": [
+          "I've opened the bleeder valve to verify zero energy, we are clear. Can I start?"
+        ]
+      },
+      "tasks": [
+        {
+          "id": "A3B_T0_Provides_Approval",
+          "description": "Provides approval to start work.",
+          "is_hidden": true,
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
+            ]
+          },
+          "next_node_id": "O2_Incident_Flange_Break"
+        },
+        {
+          "id": "A3B_T1_Request_Zero_Energy_Verification",
+          "description": "Ask for zero energy verification.",
+          "completion_criteria": "Learner asks for zero energy verification.",
+          "is_hidden": true,
+          "next_node_id": "A3B_Approval_Request"
+        }
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+{
+      "id": "A4_Approval_Request",
+      "title": "Gives approval",
+      "description": "The learner is ready to give his approval to start work.",
+      "role_play_persona": {
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work, but provide verification walkthrough when prompted.",
+        "initial_messages": [
+          "You've completed the verification in the SWC. Can I start?"
+        ]
+      },
+      "tasks": [
+        {
+          "id": "A4_T0_Provides_Approval",
+          "description": "Provides approval to start work.",
+          "is_hidden": true,
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
+            ]
+          },
+          "next_node_id": "O1_Safe_Outcome_Recommission"
         }
       ],
       "is_roleplay_complete": false,
