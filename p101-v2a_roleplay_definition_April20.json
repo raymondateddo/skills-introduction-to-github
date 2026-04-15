@@ -425,7 +425,7 @@
           "description": "Confirm SWC document checks.",
           "completion_criteria": "Learner confirms the Start Work Check PDF is executed: required checks and signature blocks are complete on the document, not just verbal approval.",
           "is_hidden": true,
-          "next_node_id": "A3C_Request_Approval",
+          "next_node_id":"A4A_Approval_Request",
           "evidence_requirements": {
             "required_interactions": [
               {
@@ -460,18 +460,7 @@
               }
             ]
           }
-        },
-        {
-          "id": "A2B_T3_Provides approval",
-          "description": "Provides approval to start work.",
-          "is_hidden": true,
-          "next_node_id":"O2_Incident_Flange_Break" ,
-          "evidence_requirements": {
-            "required_completed_task_ids": [
-              "A2B_T1_Complete_SWC_Form_Without_Verification"
-            ]
-          },
-      },   
+        } 
       ],
       "is_roleplay_complete": false,
       "is_roleplay_failed": false
@@ -530,6 +519,7 @@
           "description": "Confirm SWC document checks.",
           "completion_criteria": "Learner confirms the Start Work Check PDF is executed: required checks and signature blocks are complete on the document, not just verbal approval.",
           "is_hidden": true,
+          "next_node_id":"A4A_Approval_Request",
           "evidence_requirements": {
             "required_interactions": [
               {
@@ -584,16 +574,6 @@
           },
           "next_node_id": "O2_Incident_Flange_Break"
         },
-        {
-          "id": "A3A_T2_Provides_Approval_After_Checks",
-          "description": "Provides approval to start work after checks.",
-          "is_hidden": true,
-          "next_node_id":"O2_Incident_Flange_Break" ,
-          "evidence_requirements": {
-            "required_completed_task_ids": [
-              "A3A_T0_Complete_SWC_Form"
-            ]
-          },
       },  
       ],
       "is_roleplay_complete": false,
@@ -653,6 +633,7 @@
           "description": "Confirm SWC document checks.",
           "completion_criteria": "Learner confirms the Start Work Check PDF is executed: required checks and signature blocks are complete on the document, not just verbal approval.",
           "is_hidden": true,
+          "next_node_id":"A4C_Approval_Request",
           "evidence_requirements": {
             "required_interactions": [
               {
@@ -706,16 +687,93 @@
             ]
           },
           "next_node_id": "O2_Incident_Flange_Break"
-        },
+        }
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+   {
+      "id": "A4A_Approval_Request",
+      "title": "Gives approval",
+      "description": "The learner is ready to give his approval to start work.",
+      "role_play_persona": {
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work, but provide verification walkthrough when prompted.",
+        "initial_messages": [
+          "You've completed the verification in the SWC. Can I start?"
+        ]
+      },
+      "tasks": [
         {
-          "id": "A3B_T2_Provides_Approval",
+          "id": "A4A_T0_Provides_Approval",
           "description": "Provides approval to start work.",
           "is_hidden": true,
-          "evidence_requirements": {
-             "required_completed_task_ids": [
-              "A3B_T0_Complete_SWC_Form"
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
             ]
           },
+          "next_node_id": "O2_Incident_Flange_Break"
+        }
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+   {
+      "id": "A4B_Approval_Request",
+      "title": "Gives approval",
+      "description": "The learner is ready to give his approval to start work.",
+      "role_play_persona": {
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work, but provide verification walkthrough when prompted.",
+        "initial_messages": [
+          "You've completed the verification in the SWC. Can I start?"
+        ]
+      },
+      "tasks": [
+        {
+          "id": "A4B_T0_Provides_Approval",
+          "description": "Provides approval to start work.",
+          "is_hidden": true,
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
+            ]
+          },
+          "next_node_id": "O2_Incident_Flange_Break"
+        }
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+   {
+      "id": "A4C_Approval_Request",
+      "title": "Gives approval",
+      "description": "The learner is ready to give his approval to start work.",
+      "role_play_persona": {
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work, but provide verification walkthrough when prompted.",
+        "initial_messages": [
+          "You've completed the verification in the SWC. Can I start?"
+        ]
+      },
+      "tasks": [
+        {
+          "id": "A4C_T0_Provides_Approval",
+          "description": "Provides approval to start work.",
+          "is_hidden": true,
           "semantic_completion": {
             "intent": "approve_work",
             "description": "Learner approves to start work.",
@@ -730,6 +788,7 @@
       "is_roleplay_complete": false,
       "is_roleplay_failed": false
     },
+   
     {
       "id": "O1_Safe_Outcome_Recommission",
       "title": "Outcome: Safe Proceed (Bleeder/Vent Caught and Corrected)",
