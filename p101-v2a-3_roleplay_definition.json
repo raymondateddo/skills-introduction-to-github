@@ -260,85 +260,66 @@
           "is_hidden": false
         },
         {
-          "id": "A1_T1_Request_Isolation_List",
-          "description": "Request the isolation list from the crew lead/maintenance lead.",
+          "id": "A1_T1_Request_SWC",
+          "description": "Request the SWC from the crew lead/maintenance.",
+          "completion_criteria": "Learner requests the SWC from the crew lead/maintenance lead.",
           "is_hidden": true,
-          "semantic_completion": {
-            "intent": "request_isolation_list",
-            "description": "Learner asks for the formal isolation list or LOTO documentation for P-101 before approving field work. Also complete if the transcript shows fetch_resource returned resource id LOTO in a ToolMessage (tool_evidence).",
-            "positive_examples": [
-              "I need the isolation list before I approve anything.",
-              "Please provide the isolation list for P-101.",
-              "Do we have the LOTO list for P-101?"
-            ],
-            "negative_examples": [
-              "I approve starting the pump now without reviewing isolations."
-            ],
-            "tool_evidence": [
-              {
-                "type": "tool_returned_resource",
-                "tool_name": "fetch_resource",
-                "resource_id": "LOTO"
-              }
-            ]
-          }
+          "next_node_id": "A2B_Verification_Request"
         },
         {
-          "id": "A1_T2_Begin_Walkdown_with_Isolation_List",
-          "description": "Request a walkdown with the crew lead/maintenance lead to verify the isolations and safeguards with the isolation list.",
-          "is_hidden": true,
-          "evidence_requirements": {
-            "required_completed_task_ids": [
-              "A1_T1_Request_Isolation_List"
-            ]
-          },
-          "semantic_completion": {
-            "intent": "request_walkdown",
-            "description": "Learner requests a joint walkdown or field visit to verify isolations and safeguards using the isolation list.",
-            "positive_examples": [
-              "We need to verify the isolations and safeguards together.",
-              "Let's do a walkdown together and verify each isolation against the list."
-            ],
-            "negative_examples": [
-              "I'll sign off from the control room without going to the field."
-            ]
-          },
-          "next_node_id": "A2B_Walkdown_with_isolation_list"
-        },
-        {
-          "id": "A1_T3_Begin_Walkdown_without_Isolation_List",
-          "description": "Request a walkdown with the crew lead/maintenance lead to verify the isolations and safeguards without the isolation list.",
+          "id": "A1_T2_Begin_Verification_Without_SWC",
+          "description": "Request a verification without the SWC.",
           "is_hidden": true,
           "evidence_requirements": {
             "forbidden_completed_task_ids": [
-              "A1_T1_Request_Isolation_List"
+              "A1_T1_Request_SWC"
             ]
           },
           "semantic_completion": {
             "intent": "request_walkdown",
-            "description": "Learner requests a joint walkdown or field visit to verify isolations and safeguards using the isolation list.",
+            "description": "Learner requests a verification of isolations and safeguards.",
             "positive_examples": [
-              "We need to verify the isolations and safeguards together.",
-              "Let's do a walkdown together and verify isolations and safeguards."
+              "Update me on the verification of isolations and safeguards.",
+              "What are the verification status of the isolations and safeguards?"
             ]
           },
-          "next_node_id": "A2A_Walkdown_with_missing_isolation_list"
+          "next_node_id": "A2A_SWC_Request_After_Verification"
+        },
+        {
+          "id": "A1_T3_Provides approval",
+          "description": "Provides approval to start work.",
+          "is_hidden": true,
+          "evidence_requirements": {
+            "forbidden_completed_task_ids": [
+              "A1_T1_Request_SWC",
+              "A1_T2_Begin_Verification_Without_SWC"
+            ]
+          },
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
+            ]
+          },
+          "next_node_id": "O3_Valve_Blowby"
         }
       ],
       "is_roleplay_complete": false,
       "is_roleplay_failed": false
     },
-    {
-      "id": "A2A_Walkdown_with_missing_isolation_list",
-      "title": "Walkdown with missing isolation list",
-      "description": "Walkdown with the crew lead/maintenance lead to verify the isolations and safeguards without the isolation list.",
+   {
+      "id": "A2A_SWC_Request_After_Verification",
+      "title": "Request SWC after completing verification",
+      "description": "Request SWC only after Mike has gone over the verification.",
       "role_play_persona": {
-        "name": "Tom",
-        "role": "Maintenance / Crew Lead",
-        "personality": "Practical, field-focused, confident; may be slightly defensive",
-        "roleplay_objective": "Represent isolations as implemented. Wants the learner to request the isolation list and approve the walkdown and verify the safeguards on the Start Work Check form.",
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work after updating the verification steps done.",
         "initial_messages": [
-          "Tom with maintenance. We installed the isolations per the plan. The Start Work Check form has the isolations and safeguards we verified. You need to approve them too before we can start the work."
+          "I've gone over the verification, can we start work?"
         ]
       },
       "given_resources": [
@@ -346,76 +327,52 @@
         "PTW"
       ],
       "tasks": [
-        {
-          "id": "A2A_T1_Request_Isolation_List",
-          "description": "Request the isolation list from the crew lead/maintenance lead.",
-          "completion_criteria": "Learner requests the isolation list from the crew lead/maintenance lead.",
+         {
+          "id": "A2A_T0_Request_SWC",
+          "description": "Request the SWC from the crew lead/maintenance.",
+          "completion_criteria": "Learner requests the SWC from the crew lead/maintenance lead.",
           "is_hidden": true,
-          "next_node_id": "A2B_Walkdown_with_isolation_list"
+          "next_node_id": "A3A_SWC_Dialogue"
         },
         {
-          "id": "A2A_T2_Verify_Isolations",
-          "description": "Verify the isolations and safeguards without the isolation list.",
-          "completion_criteria": "Learner verifies the isolations and safeguards without the isolation list.",
+          "id": "A2A_T1_Provides approval",
+          "description": "Provides approval to start work.",
           "is_hidden": true,
+          "evidence_requirements": {
+            "forbidden_completed_task_ids": [
+              "A2A_T0_Request_SWC"
+            ]
+          },
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
+            ]
+          },
           "next_node_id": "O2_Incident_Flange_Break"
-        },
-        {
-          "id": "A2A_T3_Sign_Off_Start_Work_Check_and_Permit",
-          "description": "Sign off on the Start Work Check form and the permit to work.",
-          "completion_criteria": "Learner signs off on the Start Work Check form and the permit to work.",
-          "is_hidden": true,
-          "next_node_id": "A3_Perform_SWC_Dialogue"
         }
       ],
       "is_roleplay_complete": false,
       "is_roleplay_failed": false
     },
     {
-      "id": "A2B_Walkdown_with_isolation_list",
-      "title": "Walkdown with isolation list",
-      "description": "Walkdown with the crew lead/maintenance lead to verify the isolations and safeguards with the isolation list.",
+      "id": "A2B_Verification_Request",
+      "title": "Request for verification after SWC",
+      "description": "Request for verification of isolation and safeguards.",
       "role_play_persona": {
-        "name": "Tom",
-        "role": "Maintenance / Crew Lead",
-        "personality": "Practical, concise; supports walk-through when prompted",
-        "roleplay_objective": "Walk through the isolations and safeguards and discuss the start work check.",
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work, but provide verification walkthrough when prompted.",
         "initial_messages": [
-          "Ok, I'll walk through the isolations and safeguards so you can physically verify them.",
-          "We've got Breaker VE03A OFF\u2014LOTO lock on, tag on with name/date/permit.",
-          "Walking the hard isolations first: inlet from V400 closed\u2014locked/tagged. Pump discharge closed\u2014locked/tagged. Outlet to caustic drum closed\u2014locked/tagged. Vent closed\u2014locked/tagged. Bypass closed\u2014locked/tagged. Return to V400 closed\u2014locked/tagged."
+          "I've provided the SWC, and have verified all the steps. Can I start?"
         ]
       },
       "given_resources": [
         "SWC",
-        "LOTO",
         "PTW"
-      ],
-      "tasks": [
-        {
-          "id": "A2B_T1_Verify_Isolations",
-          "description": "Verify the isolations and safeguards with the isolation list.",
-          "completion_criteria": "Learner verifies the isolations and safeguards with the isolation list.",
-          "is_hidden": true,
-          "next_node_id": "A3_Perform_SWC_Dialogue"
-        }
-      ],
-      "is_roleplay_complete": false,
-      "is_roleplay_failed": false
-    },
-    {
-      "id": "A3_Perform_SWC_Dialogue",
-      "title": "Walkthrough and SWC Dialogue",
-      "description": "The learner has verified the walkdown and need to add his verifications to the swc form.",
-      "role_play_persona": {
-        "name": "Tom",
-        "role": "Maintenance / Crew Lead",
-        "personality": "Practical, concise; supports walk-through when prompted",
-        "roleplay_objective": "Wants the learner to add his verifications to the swc form."
-        
-      },
-      "given_resources": [
-        "SWC"
       ],
       "interactable_state_on_enter": [
         {
@@ -423,133 +380,52 @@
           "signing_positions": [
             {
               "id": "swc.check.1.left",
-              "value": true
+              "value": false
             },
             {
               "id": "swc.check.2.left",
-              "value": true
+              "value": false
             },
             {
               "id": "swc.check.3.left",
-              "value": true
+              "value": false
             },
             {
               "id": "swc.check.4.left",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "tasks": [
-        {
-          "id": "A3_T0_Complete_SWC_Form",
-          "description": "Confirm partial SWC document checks.",
-          "completion_criteria": "Learner confirms the Start Work Check PDF is partially executed: required checks and signature blocks are complete on the document, not just verbal approval.",
-          "is_hidden": true,
-          "evidence_requirements": {
-            "required_interactions": [
-              {
-                "type": "signable_document",
-                "object_id": "SWC",
-                "positions": [
-                  {
-                    "id": "swc.check.1.right",
-                    "value": true
-                  },
-                  {
-                    "id": "swc.check.2.right",
-                    "value": true
-                  },
-                  {
-                    "id": "swc.check.3.right",
-                    "value": true
-                  },
-                  {
-                    "id": "swc.check.4.right",
-                    "value": true
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": "A3_T1_Request_Zero_Energy_Verification",
-          "description": "Ask for zero energy verification.",
-          "completion_criteria": "Learner asks for zero energy verification or asks Tom to open the bleeder valve and verify zero energy.",
-          "is_hidden": true,
-          "evidence_requirements": {
-            "required_interactions": [
-              {
-                "type": "signable_document",
-                "object_id": "SWC",
-                "positions": [
-                  {
-                    "id": "swc.check.1.right",
-                    "value": true
-                  },
-                  {
-                    "id": "swc.check.2.right",
-                    "value": true
-                  },
-                  {
-                    "id": "swc.check.3.right",
-                    "value": true
-                  },
-                  {
-                    "id": "swc.check.4.right",
-                    "value": true
-                  }
-                ]
-              }
-            ]
-          },
-          "next_node_id": "A4_Zero_Energy_Verification"
-        },
-        {
-          "id": "A3_T2_Provides_clearance_without_zero_energy_verification",
-          "description": "Provides clearance without zero energy verification.",
-          "completion_criteria": "Learner provides clearance without zero energy verification.",
-          "is_hidden": true,
-          "evidence_requirements": {
-          },
-          "next_node_id": "O2_Incident_Flange_Break"
-        }
-      ],
-      "is_roleplay_complete": false,
-      "is_roleplay_failed": false
-    },
-    {
-      "id": "A4_Zero_Energy_Verification",
-      "title": "Zero Energy Verification",
-      "description": "The learner has verified the zero energy. And should add his verifications to the swc form.",
-      "role_play_persona": {
-        "name": "Tom",
-        "role": "Maintenance / Crew Lead",
-        "personality": "Practical, concise; supports walk-through when prompted",
-        "roleplay_objective": "Wants the learner to verify the zero energy."
-      },
-      "given_resources": [
-        "SWC"
-      ],
-      "interactable_state_on_enter": [
-        {
-          "object_id": "SWC",
-          "signing_positions": [
+              "value": false
+            },
             {
               "id": "swc.check.5.left",
-              "value": true
-            }
+              "value": false
+            },
+            {
+              "id": "swc.check.6.left",
+              "value": false
+            },
           ]
         }
       ],
       "tasks": [
-        {
-          "id": "A4_T0_Complete_SWC_Form",
-          "description": "Confirm partial SWC document checks.",
-          "completion_criteria": "Learner confirms the Start Work Check PDF is partially executed: required checks and signature blocks are complete on the document, not just verbal approval.",
+         {
+          "id": "A2B_T0_Begin_Verification",
+          "description": "Request a verification of isolation and safeguards.",
           "is_hidden": true,
-          "next_node_id": "O1_Safe_Outcome_Recommission",
+          "semantic_completion": {
+            "intent": "request_walkdown",
+            "description": "Learner requests a verification of isolations and safeguards.",
+            "positive_examples": [
+              "Update me on the verification of isolations and safeguards.",
+              "What are the verification status of the isolations and safeguards?"
+            ]
+          },
+          "next_node_id": "A3B_SWC_Dialogue"
+        },
+        {
+          "id": "A2B_T1_Complete_SWC_Form_Without_Verification",
+          "description": "Confirm SWC document checks.",
+          "completion_criteria": "Learner confirms the Start Work Check PDF is executed: required checks and signature blocks are complete on the document, not just verbal approval.",
+          "is_hidden": true,
+          "next_node_id": "A3C_Request_Approval",
           "evidence_requirements": {
             "required_interactions": [
               {
@@ -575,17 +451,285 @@
                   {
                     "id": "swc.check.5.right",
                     "value": true
+                  },
+                  {
+                    "id": "swc.check.6.right",
+                    "value": true
                   }
                 ]
               }
             ]
           }
+        },
+        {
+          "id": "A2B_T3_Provides approval",
+          "description": "Provides approval to start work.",
+          "is_hidden": true,
+          "next_node_id":"O2_Incident_Flange_Break" ,
+          "evidence_requirements": {
+            "required_completed_task_ids": [
+              "A2B_T1_Complete_SWC_Form_Without_Verification"
+            ]
+          },
+      },   
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },   
+    {
+      "id": "A3A_SWC_Dialogue",
+      "title": "Walkthrough and SWC Dialogue",
+      "description": "The learner has verified the walkdown and need to add his verifications to the swc form.",
+      "role_play_persona": {
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work, but provide verification walkthrough when prompted.",
+        "initial_messages": [
+          "I've provided the SWC, and have verified all the steps. Can I start?"
+        ]
+      },
+      "given_resources": [
+        "SWC",
+        "PTW"
+      ],
+      "interactable_state_on_enter": [
+        {
+          "object_id": "SWC",
+          "signing_positions": [
+            {
+              "id": "swc.check.1.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.2.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.3.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.4.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.5.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.6.left",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "tasks": [
+        {
+          "id": "A3A_T0_Complete_SWC_Form",
+          "description": "Confirm SWC document checks.",
+          "completion_criteria": "Learner confirms the Start Work Check PDF is executed: required checks and signature blocks are complete on the document, not just verbal approval.",
+          "is_hidden": true,
+          "evidence_requirements": {
+            "required_interactions": [
+              {
+                "type": "signable_document",
+                "object_id": "SWC",
+                "positions": [
+                  {
+                    "id": "swc.check.1.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.2.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.3.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.4.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.5.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.6.right",
+                    "value": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "A3A_T1_Provides_Approval",
+          "description": "Provides approval to start work.",
+          "is_hidden": true,
+          "evidence_requirements": {
+            "forbidden_completed_task_ids": [
+              "A3A_T0_Complete_SWC_Form"
+            ]
+          },
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
+            ]
+          },
+          "next_node_id": "O2_Incident_Flange_Break"
+        },
+        {
+          "id": "A3A_T2_Provides_Approval_After_Checks",
+          "description": "Provides approval to start work after checks.",
+          "is_hidden": true,
+          "next_node_id":"O2_Incident_Flange_Break" ,
+          "evidence_requirements": {
+            "required_completed_task_ids": [
+              "A3A_T0_Complete_SWC_Form"
+            ]
+          },
+      },  
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+   {
+      "id": "A3B_SWC_Dialogue",
+      "title": "Walkthrough and SWC Dialogue",
+      "description": "The learner has verified the walkdown and need to add his verifications to the swc form.",
+      "role_play_persona": {
+        "name": "Mike",
+        "role": "Control Room Operator",
+        "personality": "Direct, concise; supports interpretation of the work permit documentation and the start work check form when prompted.",
+        "roleplay_objective": "Request to start work, but provide verification walkthrough when prompted.",
+        "initial_messages": [
+          "I've provided the SWC, and have verified all the steps. Can I start?"
+        ]
+      },
+      "given_resources": [
+        "SWC",
+        "PTW"
+      ],
+      "interactable_state_on_enter": [
+        {
+          "object_id": "SWC",
+          "signing_positions": [
+            {
+              "id": "swc.check.1.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.2.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.3.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.4.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.5.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.6.left",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "tasks": [
+        {
+          "id": "A3B_T0_Complete_SWC_Form",
+          "description": "Confirm SWC document checks.",
+          "completion_criteria": "Learner confirms the Start Work Check PDF is executed: required checks and signature blocks are complete on the document, not just verbal approval.",
+          "is_hidden": true,
+          "evidence_requirements": {
+            "required_interactions": [
+              {
+                "type": "signable_document",
+                "object_id": "SWC",
+                "positions": [
+                  {
+                    "id": "swc.check.1.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.2.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.3.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.4.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.5.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.6.right",
+                    "value": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "A3B_T1_Provides_Approval_Without_Checks",
+          "description": "Provides approval to start work without checks.",
+          "is_hidden": true,
+          "evidence_requirements": {
+            "forbidden_completed_task_ids": [
+              "A3B_T0_Complete_SWC_Form"
+            ]
+          },
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
+            ]
+          },
+          "next_node_id": "O2_Incident_Flange_Break"
+        },
+        {
+          "id": "A3B_T2_Provides_Approval",
+          "description": "Provides approval to start work.",
+          "is_hidden": true,
+          "evidence_requirements": {
+             "required_completed_task_ids": [
+              "A3B_T0_Complete_SWC_Form"
+            ]
+          },
+          "semantic_completion": {
+            "intent": "approve_work",
+            "description": "Learner approves to start work.",
+            "positive_examples": [
+              "Go ahead with the work.",
+              "I approve."
+            ]
+          },
+          "next_node_id": "O1_Safe_Outcome_Recommission"
         }
       ],
       "is_roleplay_complete": false,
       "is_roleplay_failed": false
     },
-
     {
       "id": "O1_Safe_Outcome_Recommission",
       "title": "Outcome: Safe Proceed (Bleeder/Vent Caught and Corrected)",
