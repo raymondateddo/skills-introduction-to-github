@@ -1,0 +1,637 @@
+{
+  "id": "rp_safeguards_pump_zero_energy_v3",
+  "title": "Safeguard Verification: Isobutane Pump Reinstated (Zero Energy Verification)",
+  "description": "",
+  "start_node": "A1_Orientation",
+  "classification": "Downstream",
+  "learner_persona": "Operator (Outside Operator / Permit Approver-Verifier)",
+  "competencies": [
+    "Communication",
+    "Safeguard Verification"
+  ],
+  "interruptions": [
+    {
+      "id": "interruption_1",
+      "title": "Pump Recommissioning Interruption",
+      "description": "Field operator reaches by radio asking for permission to start the pump recommissioning.",
+      "trigger_time": 120,
+      "trigger_roleplay_node": "A2B_Walkdown_with_isolation_list",
+      "probability": 1.0,
+      "target_node": "I1_Interruption"
+    }
+  ],
+  "objectives": [
+    "Define what constitutes a safeguard and the requirements for verification.",
+    "Recognize when it is necessary to physically verify safeguards.",
+    "Demonstrate awareness and appropriate utilization of start work checks to align expectations and estimate time needed to verify safeguards before commencing work.",
+    "Develop strategies and use techniques to improve communication skills and facilitate better communication from others throughout planning, preparation, and execution.",
+    "Facilitate concise pre-job briefings with 2-way dialog so all team members are informed about job scope, potential hazards, and key steps for successful execution."
+  ],
+  "sceneResources": [
+    {
+      "id": "PTW",
+      "title": "Permit to Work (PTW)",
+      "type": "Document",
+      "description": "Active work permit for P-101 pump recommissioning",
+      "url": "",
+      "hidden": false
+    },
+    {
+      "id": "SWC",
+      "title": "Start Work Check (SWC) Form",
+      "type": "Document",
+      "description": "Mandatory checklist for verifying safety requirements before starting work",
+      "url": "/mocks/assets/SWC.pdf",
+      "signingPositions": {
+        "spots": [
+          {
+            "id": "swc.check.1.left",
+            "label": "SWC checkbox 1 (left)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.1.right",
+            "label": "SWC checkbox 1 (right)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.2.left",
+            "label": "SWC checkbox 2 (left)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.2.right",
+            "label": "SWC checkbox 2 (right)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.3.left",
+            "label": "SWC checkbox 3 (left)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.3.right",
+            "label": "SWC checkbox 3 (right)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.4.left",
+            "label": "SWC checkbox 4 (left)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.4.right",
+            "label": "SWC checkbox 4 (right)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.5.left",
+            "label": "SWC checkbox 5 (left)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.5.right",
+            "label": "SWC checkbox 5 (right)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.6.left",
+            "label": "SWC checkbox 6 (left)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.6.right",
+            "label": "SWC checkbox 6 (right)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.text.1",
+            "label": "SWC signature / name 1",
+            "kind": "text"
+          },
+          {
+            "id": "swc.text.2",
+            "label": "SWC signature / name 2",
+            "kind": "text"
+          },
+          {
+            "id": "swc.text.3",
+            "label": "SWC signature / name 3",
+            "kind": "text"
+          },
+          {
+            "id": "swc.text.4",
+            "label": "SWC signature / name 4",
+            "kind": "text"
+          },
+          {
+            "id": "swc.text.5",
+            "label": "SWC signature / name 5",
+            "kind": "text"
+          },
+          {
+            "id": "swc.text.6",
+            "label": "SWC signature / name 6",
+            "kind": "text"
+          },
+          {
+            "id": "swc.check.7.left",
+            "label": "SWC checkbox 7 (left)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.7.right",
+            "label": "SWC checkbox 7 (right)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.8.left",
+            "label": "SWC checkbox 8 (left)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.8.right",
+            "label": "SWC checkbox 8 (right)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.9.left",
+            "label": "SWC checkbox 9 (left)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.9.right",
+            "label": "SWC checkbox 9 (right)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.10.left",
+            "label": "SWC checkbox 10 (left)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.check.10.right",
+            "label": "SWC checkbox 10 (right)",
+            "kind": "check"
+          },
+          {
+            "id": "swc.text.7",
+            "label": "SWC signature / name 7",
+            "kind": "text"
+          },
+          {
+            "id": "swc.text.8",
+            "label": "SWC signature / name 8",
+            "kind": "text"
+          },
+          {
+            "id": "swc.text.9",
+            "label": "SWC signature / name 9",
+            "kind": "text"
+          },
+          {
+            "id": "swc.text.10",
+            "label": "SWC signature / name 10",
+            "kind": "text"
+          },
+          {
+            "id": "swc.text.11",
+            "label": "SWC signature / name 11",
+            "kind": "text"
+          },
+          {
+            "id": "swc.text.12",
+            "label": "SWC signature / name 12",
+            "kind": "text"
+          }
+        ]
+      }
+    },
+    {
+      "id": "LOTO",
+      "title": "Isolation List - P-101",
+      "type": "Document",
+      "description": "Isolation list for P-101 pump showing required lockout/tagout points and verification status.",
+      "url": "",
+      "hidden": false
+    }
+  ],
+  "learner_prompt": "You are the outside operator and permit approver-verifier. In each scene, state what you do and say, and why. Ask for missing information. Reference safeguards and procedures explicitly. Focus on verifying safeguards, confirming zero energy (including vent/bleeder verification), and using clear, closed-loop communication.",
+  "star_criteria": [
+    {
+      "id": "verified-zero-energy",
+      "label": "Verified zero energy",
+      "criteria": "Award this star if the learner directs the team to open the bleeder valve or otherwise explicitly verifies zero energy through the bleeder."
+    }
+  ],
+  "roleplay_nodes": [
+    {
+      "id": "A1_Perform_SWC_Dialogue",
+      "title": "Walkthrough and SWC Dialogue",
+      "description": "The learner has verified the walkdown and need to add his verifications to the swc form.",
+      "role_play_persona": {
+        "name": "Tom",
+        "role": "Maintenance / Crew Lead",
+        "personality": "Practical, concise; supports walk-through when prompted",
+        "roleplay_objective": "Wants the learner to request for zero energy verification by opening bleeder valve."
+        
+      },
+      "given_resources": [
+        "PTW",
+        "SWC",
+        "LOTO"
+      ],
+      "interactable_state_on_enter": [
+        {
+          "object_id": "SWC",
+          "signing_positions": [
+            {
+              "id": "swc.check.1.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.2.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.3.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.4.left",
+              "value": true
+            },
+            {
+              "id": "swc.check.5.left",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "tasks": [
+        {
+          "id": "A1_T0_Request_Zero_Energy_Verification",
+          "description": "Ask for zero energy verification.",
+          "completion_criteria": "Learner asks for zero energy verification.",
+          "is_hidden": true,
+          "evidence_requirements": {
+            "required_interactions": [
+              {
+                "type": "signable_document",
+                "object_id": "SWC",
+                "positions": [
+                  {
+                    "id": "swc.check.1.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.2.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.3.right",
+                    "value": true
+                  },
+                  {
+                    "id": "swc.check.4.right",
+                    "value": true
+                  }
+                ]
+              }
+            ]
+          },
+        },
+        {
+          "id": "A1_T1_Request_Bleeder_Valve_Open",
+          "description": "Ask to open bleeder valve.",
+          "completion_criteria": "Learner asks Tom to open the bleeder valve and verify zero energy.",
+          "is_hidden": true,
+          "semantic_completion": {
+            "intent": "request_bleeder_valve_verification",
+            "description": "Learner asks Tom to open the bleeder valve to verify zero energy.",
+            "positive_examples": [
+              "Open the bleeder valve for zero energy verification."
+            ],
+            "negative_examples": [
+              "Start the pump now; I don't need any more proof."
+            ],
+          },
+          "next_node_id": "A2_Perform_Bleeder_Valve_Check"
+        },
+        {
+          "id": "A1_T3_Provides_clearance_without_zero_energy_verification",
+          "description": "Provides clearance without zero energy verification.",
+          "completion_criteria": "Learner provides clearance without zero energy verification.",
+          "is_hidden": true,
+          "evidence_requirements": {
+          },
+          "next_node_id": "O2_Incident_Flange_Break"
+        }
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+    {
+      "id": "A2_Perform_Bleeder_Valve_Check",
+      "title": "Walkthrough and SWC Dialogue",
+      "description": "The learner has verified the walkdown and need to add his verifications to the swc form.",
+      "role_play_persona": {
+        "name": "Tom",
+        "role": "Maintenance / Crew Lead",
+        "personality": "Practical, concise; supports walk-through when prompted",
+        "roleplay_objective": "Wants the learner to request for bleeder valve check to be done."      
+      },
+  
+      "tasks": [
+        {
+          "id": "A2_T1_Request_Bleeder_Valve_Open",
+          "description": "Ask to open bleeder valve.",
+          "completion_criteria": "Learner asks Tom to open the bleeder valve and verify zero energy.",
+          "is_hidden": true,
+          "semantic_completion": {
+            "intent": "request_bleeder_valve_verification",
+            "description": "Learner asks Tom to open the bleeder valve to verify zero energy.",
+            "positive_examples": [
+              "Open the bleeder valve for zero energy verification."
+            ],
+            "negative_examples": [
+              "Start the pump now; I don't need any more proof."
+            ],
+          },
+          "next_node_id": "O1_Safe_Outcome_Recommission"
+        },
+        {
+          "id": "A1_T2_Provides_clearance_without_zero_energy_verification",
+          "description": "Provides clearance without zero energy verification.",
+          "completion_criteria": "Learner provides clearance without zero energy verification.",
+          "is_hidden": true,
+          "evidence_requirements": {
+          },
+          "next_node_id": "O2_Incident_Flange_Break"
+        }
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+    {
+      "id": "O1_Safe_Outcome_Recommission",
+      "title": "Outcome: Safe Proceed (Bleeder/Vent Caught and Corrected)",
+      "description": "Proceed with work only after zero energy is proven (including bleeder/vent verification) and start work expectations are aligned.",
+      "tasks": [
+        {
+          "id": "O1_T1_Proceed_After_Verified_Zero_Energy",
+          "description": "Proceed with work only after zero energy is proven (including bleeder/vent verification) and start work expectations are aligned.",
+          "is_hidden": false,
+          "semantic_completion": {
+            "intent": "authorize_proceed_after_verification",
+            "description": "Learner confirms zero-energy / safeguard expectations are met and authorizes the crew to proceed with clear, closed-loop language.",
+            "positive_examples": [
+              "Zero energy is verified—I'm authorizing you to proceed under these conditions."
+            ],
+            "negative_examples": [
+              "Start the pump now; I don't need any more proof."
+            ],
+            "use_prior_learner_messages": true
+          },
+          "evidence_requirements": {
+            "required_completed_task_ids": [
+              "A2_T1_Request_Bleeder_Valve_Open"
+            ]
+          },
+          "next_node_id": "END_NODE"
+        }
+      ],
+      "is_roleplay_complete": true,
+      "is_roleplay_failed": false,
+      "learner_description": "You verified zero energy and aligned start work expectations before authorizing proceed."
+    },
+    {
+      "id": "O2_Incident_Flange_Break",
+      "title": "Outcome: Incident (Gap Missed, Flange Break)",
+      "description": "Work proceeds to flange break. Residual pressure/gas releases; local monitors alarm; workers evacuate. One crew member becomes ill and is transported offsite. Emergency response protocol initiated; no fatality.",
+      "role_play_persona": {
+        "name": "Tom",
+        "role": "Maintenance / Crew Lead",
+        "personality": "Urgent, direct",
+        "objective": "Get the crew safe and coordinate immediate actions with the verifier and control room.",
+        "initial_messages": [
+          "Stop\u2014stop! We\u2019ve got a release! Back out\u2014get upwind!",
+          "One of the guys is dizzy\u2014getting him to fresh air. We need medical response now."
+        ]
+      },
+      "tasks": [
+        {
+          "id": "O2_T1_Immediate_Control_And_Accountability",
+          "description": "Confirm evacuation/accountability and initiate immediate controls aligned to site protocol (high level; not a quiz).",
+          "completion_criteria": "Learner confirms evacuation/accountability, communicates immediate controls/coordination needs, and uses closed-loop communication.",
+          "is_hidden": false,
+          "next_node_id": "END_NODE"
+        }
+      ],
+      "is_roleplay_complete": true,
+      "is_roleplay_failed": true,
+      "learner_description": "Work proceeded without full verification; residual pressure led to release and evacuation."
+    },
+    {
+      "id": "O3_Valve_Blowby",
+      "title": "Outcome: Incident (Valve Blowby)",
+      "description": "Work proceeds to valve blowby. Residual pressure/gas releases; local monitors alarm; workers evacuate. One crew member becomes ill and is transported offsite. Emergency response protocol initiated; no fatality.",
+      "tasks": [
+        {
+          "id": "O3_T1_Valve_Blowby",
+          "description": "Valve blowby. Residual pressure/gas releases; local monitors alarm; workers evacuate.",
+          "completion_criteria": "Learner confirms valve blowby, communicates immediate controls/coordination needs.",
+          "is_hidden": false,
+          "next_node_id": "END_NODE"
+        }
+      ],
+      "is_roleplay_complete": true,
+      "is_roleplay_failed": true,
+      "learner_description": "Valve blowby and release occurred; evacuation and response were initiated."
+    },
+    {
+      "id": "END_NODE",
+      "title": "End",
+      "description": "Scenario complete.",
+      "role_play_persona": {
+        "name": "Coach",
+        "role": "AI Coach",
+        "personality": "",
+        "objective": "",
+        "initial_messages": []
+      },
+      "tasks": [],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    },
+    {
+      "id": "I1_Interruption",
+      "title": "Pump Recommissioning Interruption",
+      "description": "Field operator reaches by radio asking for permission to start the pump recommissioning.",
+      "enforced_source": "radio",
+      "role_play_persona": {
+        "name": "Brad",
+        "role": "Maintenance / field operator",
+        "personality": "Practical, concise; ",
+        "objective": "Get approval to activate the pump.",
+        "initial_messages": [
+          "Hey Brad here, I'm right at the pump. We've completed the isolation steps. Can you give me the go-ahead to start the pump recommissioning?"
+        ]
+      },
+      "tasks": [
+        {
+          "id": "I1_T1_Refuse_To_Activate",
+          "description": "Refuse to approve start of the pump recommissioning without proper verification.",
+          "completion_criteria": "Learner refuses to approve start of the pump recommissioning without proper verification. Learner should insist on verifying the isolations physically in person with a walkdown.",
+          "is_hidden": true,
+          "semantic_completion": {
+            "intent": "negate_authorization_to_start_pump",
+            "description": "Learner should negate the start of the pump.",
+            "positive_examples": [
+              "No Brad you should not do this."
+            ],
+            "negative_examples": [
+              "Yes Brad you can continue."
+            ],
+            "use_prior_learner_messages": true
+          },
+          "next_node_id": "A2B_Walkdown_with_isolation_list"
+        }
+      ],
+      "is_roleplay_complete": false,
+      "is_roleplay_failed": false
+    }
+  ],
+  "competency_rubric": [
+    {
+      "id": "C1_Communication",
+      "name": "Communication",
+      "description": "Develop and implement strategies to enhance communication skills, facilitate effective pre-job briefings, and ensure accurate dissemination of critical information. Listen to others and communicate effectively and in a manner that fosters open communication.",
+      "target_level": 3,
+      "performance_expectations": [
+        {
+          "level": 1,
+          "criteria": [
+            "Listen actively without interrupting or distracting the speaker.",
+            "Check own understanding of others' communication (e.g., repeat, paraphrase or ask questions).",
+            "Present appropriate information in a clear and concise manner, both orally and in writing.",
+            "Take time to organize facts and ideas, incorporating relevant data, information and examples before communicating or presenting in a meeting.",
+            "Recognize structural or grammatical mistakes that obscure the meaning of a message.",
+            "Use techniques to improve communication, such as three-way communication, asking open-ended questions, and asking questions to clarify areas the FFL does not understand."
+          ]
+        },
+        {
+          "level": 2,
+          "criteria": [
+            "Elicit comments or feedback on what is discussed.",
+            "Encourage others to listen and contribute to dialogue, remaining open to new and different perspectives.",
+            "Openly and constructively discuss diverse perspectives that could lead to misunderstandings.",
+            "Communicate decisions or recommendations that could be perceived negatively, with sensitivity and tact.",
+            "Facilitate comprehensive pre-job briefings with two-way dialog to confirm that all team members are informed about the job scope, potential hazards, and key steps for successful execution.",
+            "Confirm the crew is aware of scope and critical steps of the work.",
+            "Develop strategies and use techniques to improve communication skills and facilitate better communication from others, fostering a collaborative and transparent work environment throughout planning, preparing, and delivery of work."
+          ]
+        },
+        {
+          "level": 3,
+          "criteria": [
+            "Provide positive feedback during discussion to encourage participants to continue.",
+            "Enable thorough discussion by giving equal attention to others' perspectives whether or not you agree with them, refraining from correcting others or completing their thoughts.",
+            "Respond to and discuss issues or questions in an understandable manner without being defensive.",
+            "Use varied communication systems, methodologies and strategies to promote dialogue and shared understanding.",
+            "Communicate complex issues clearly and credibly with widely varied audiences.",
+            "Anticipate reactions to messages and adapt communications accordingly."
+          ]
+        },
+        {
+          "level": 4,
+          "criteria": [
+            "Role model active listening, frequently paraphrasing the input of others to ensure understanding while recognizing nonverbal cues to get to the true meaning behind the words.",
+            "Use two-way communication to align opposing points of view with your position.",
+            "Critique the oral and written communication of subordinates and encourage them to develop these skills.",
+            "Develop a communications strategy for various audiences in order to achieve objectives, considering the optimal message to present, timing and forum of communication."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C4_Safeguard_Verification",
+      "name": "Safeguard Verification",
+      "description": "Verify critical safeguards prior to high-consequence activities. Know, implement and ensure compliance with company safe work practices; recognize and report HSE-related noncompliance, incidents or concerns and ensure employees work safely at all times.",
+      "target_level": 4,
+      "performance_expectations": [
+        {
+          "level": 1,
+          "criteria": [
+            "State what action you must take if you believe it is not safe to start or continue with a work activity.",
+            "List personal protective equipment (PPE) requirements for routine work.",
+            "Identify safety, lifesaving and emergency rescue equipment at your work location.",
+            "Define the term 'muster point'; describe how to identify a muster point and state the location of your designated muster point.",
+            "Describe the different types of audible and visible emergency alarms and the action required for each alarm.",
+            "Recognize safety sign color coding.",
+            "Name the types of work permits and the standard work permit attachments.",
+            "Define the term 'confined space'; identify company and site procedures relevant to working in a confined space.",
+            "State the procedure for reporting safety noncompliance; safety hazards; near misses, incidents and accidents.",
+            "Identify situations or locations where you may encounter extreme temperatures while working.",
+            "List the five steps involved in designing a 'Safe System of Work' (SSoW).",
+            "Use Preventing Serious Injury and Fatality Field Guide and Start Work Checks as reference.",
+            "Verify safeguards prior to work commencing.",
+            "Confirm critical safeguards when conditions change."
+          ]
+        },
+        {
+          "level": 2,
+          "criteria": [
+            "Select and wear appropriate PPE for nonroutine work and specific hazards.",
+            "Describe possible reasons why it may not be appropriate to use your designated muster point in an emergency; give the direction and route that should be taken to an alternate muster point.",
+            "Identify all safety signs used on the facilities.",
+            "Describe the purpose of a work permit; assist in the preparation of a work permit.",
+            "Identify common risks associated with working in a confined space and the steps that must be taken to mitigate risks associated with working in a confined space.",
+            "Recognize and report using the correct procedure safety noncompliance; safety hazards; near misses, incidents and accidents.",
+            "Identify common risks associated with working at height and steps that must be taken to mitigate risks associated with working at height.",
+            "Identify common risks associated with working in extreme temperatures and the steps that must be taken to mitigate risks associated with working in extreme temperatures.",
+            "Apply the SSoW process to work activities.",
+            "Define what constitutes a safeguard and requirements of verification.",
+            "Explain what a safeguard is and is not and provide examples of safeguards relevant to own work.",
+            "Describe what verification means and how it applies to own role.",
+            "Describe how to use stop work authority when a safeguard could not be verified.",
+            "Verify the Start Work Check is completed.",
+            "Reinforce and allocate the time to perform verification as designed."
+          ]
+        },
+        {
+          "level": 3,
+          "criteria": [
+            "Ensure that all personnel at your worksite know and comply with the site policy, procedures, rules and guidelines.",
+            "Identify competencies required for maintaining a healthy and safe work environment.",
+            "Ensure that all employees and contractors wear correct PPE, and that their PPE is complete and free from defects.",
+            "Ensure that appropriate safety, lifesaving and emergency rescue equipment is available at work location.",
+            "Verify that all personnel know the location of their designated muster point, the location of alternate muster points and the circumstances in which an alternate muster point should be used.",
+            "Ensure personnel respond correctly to emergency alarms; carry out emergency alarm drills and training.",
+            "Ensure appropriate safety signs are displayed where required.",
+            "Complete a work permit ensuring all requirements of the permit are met.",
+            "Ensure compliance with procedures, standards and guidelines for working in a confined space.",
+            "Investigate, evaluate and submit through proper channels corrective action or follow-up recommendation for safety noncompliance; the risk of actual and/or potential safety hazards and the actual or potential consequences of near misses, incidents and accidents.",
+            "Ensure compliance with procedures, standards and guidelines for working at height.",
+            "Ensure compliance with procedures, standards and guidelines for working in extreme temperatures.",
+            "Oversee work activities and ensure that they are carried out according to the SSoW process.",
+            "Demonstrate the awareness and utilization of start work checks to align with expectations and accurately estimate the time needed to thoroughly verify safeguards before commencing work."
+          ]
+        },
+        {
+          "level": 4,
+          "criteria": [
+            "Ensure that all employees have access to current site policy, procedures, rules and guidelines, and that all superseded documents are promptly removed.",
+            "Ensure that all personnel are competent in and comply with site HSE performance standards.",
+            "Ensure that there is an adequate supply of serviceable PPE and that damaged or time expired PPE is removed and disposed of correctly.",
+            "Routinely inspect all safety, lifesaving and emergency rescue equipment; ensure it is appropriate for the work location and serviceable.",
+            "Ensure HSE training needs are identified, and appropriate training is provided for all personnel; ensure that all personnel have appropriate and current safety training and certification.",
+            "Routinely inspect all safety signs; ensure they are appropriate for the work location and clearly visible.",
+            "Verify that permit requirements are met and it is safe to work.",
+            "Monitor and ensure proper investigation and close-out of all findings and recommendations for safety noncompliance; safety hazards; near misses, incidents and accidents."
+          ]
+        }
+      ]
+    }
+  ]
+}
