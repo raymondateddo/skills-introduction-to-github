@@ -267,10 +267,10 @@
           "next_node_id": "A2B_Verification_Request"
         },
         {
-          "id": "A1_T2_Begin_Verification_Without_SWC",
+          "id": "A1_T2_Begin_Verification",
           "description": "Request a verification without the SWC.",
           "is_hidden": true,
-          "next_node_id": "A2A_SWC_Request_After_Verification",
+          "next_node_id": "A2A_SWC_Request",
           "evidence_requirements": {
             "forbidden_completed_task_ids": [
               "A1_T1_Request_SWC"
@@ -292,7 +292,7 @@
           "evidence_requirements": {
             "forbidden_completed_task_ids": [
               "A1_T1_Request_SWC",
-              "A1_T2_Begin_Verification_Without_SWC"
+              "A1_T2_Begin_Verification"
             ]
           },
           "semantic_completion": {
@@ -313,7 +313,7 @@
           "evidence_requirements": {
             "forbidden_completed_task_ids": [
               "A1_T1_Request_SWC",
-              "A1_T2_Begin_Verification_Without_SWC",
+              "A1_T2_Begin_Verification",
               "A1_T3_Provides_Approval"
             ]
           },
@@ -332,7 +332,7 @@
       "is_roleplay_failed": false
     },
    {
-      "id": "A2A_SWC_Request_After_Verification",
+      "id": "A2A_SWC_Request",
       "title": "Request SWC after completing verification",
       "description": "Request SWC only after Mike has gone over the verification.",
       "role_play_persona": {
@@ -450,7 +450,7 @@
           "evidence_requirements": {
             "forbidden_completed_task_ids": [
               "A2B_T0_Begin_Verification",
-              "A2B_T2_Complete_SWC_Form_Without_Verification"
+              "A2B_T2_Complete_SWC_Form"
             ]
           },
           "semantic_completion": {
@@ -464,7 +464,7 @@
           "next_node_id": "A3C_Verification_Assistance"
         },
         {
-          "id": "A2B_T2_Complete_SWC_Form_Without_Verification",
+          "id": "A2B_T2_Complete_SWC_Form",
           "description": "Confirm SWC document checks.",
           "completion_criteria": "Learner confirms the Start Work Check PDF is executed: required checks and signature blocks are complete on the document, not just verbal approval.",
           "is_hidden": true,
